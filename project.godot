@@ -1,0 +1,158 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Node",
+"class": "BaseGameEntity",
+"language": "GDScript",
+"path": "res://Classes/BaseGameEntity.gd"
+}, {
+"base": "State",
+"class": "CookStew",
+"language": "GDScript",
+"path": "res://Game/Entities/MinersWife/States/CookStew.gd"
+}, {
+"base": "Reference",
+"class": "CustomSorters",
+"language": "GDScript",
+"path": "res://Classes/Static/CustomSorter.gd"
+}, {
+"base": "State",
+"class": "DoHouseWork",
+"language": "GDScript",
+"path": "res://Game/Entities/MinersWife/States/DoHouseWork.gd"
+}, {
+"base": "State",
+"class": "EatStew",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/EatStew.gd"
+}, {
+"base": "State",
+"class": "EnterMineAndDigForNugget",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/EnterMineAndDigForNugget.gd"
+}, {
+"base": "State",
+"class": "GoHomeAndSleepTilRested",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/GoHomeAndSleepTilRested.gd"
+}, {
+"base": "BaseGameEntity",
+"class": "Miner",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/Miner.gd"
+}, {
+"base": "State",
+"class": "MinerGlobalState",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/Global/MinerGlobalState.gd"
+}, {
+"base": "BaseGameEntity",
+"class": "MinersWife",
+"language": "GDScript",
+"path": "res://Game/Entities/MinersWife/MinersWife.gd"
+}, {
+"base": "Node",
+"class": "PriorityQueue",
+"language": "GDScript",
+"path": "res://Classes/PriorityQueue/PriorityQueue.gd"
+}, {
+"base": "State",
+"class": "QuenchThirst",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/QuenchThirst.gd"
+}, {
+"base": "Node",
+"class": "QueueItem",
+"language": "GDScript",
+"path": "res://Classes/PriorityQueue/QueueItem.gd"
+}, {
+"base": "Node",
+"class": "State",
+"language": "GDScript",
+"path": "res://Classes/StateMachine/State.gd"
+}, {
+"base": "Node",
+"class": "StateMachine",
+"language": "GDScript",
+"path": "res://Classes/StateMachine/StateMachine.gd"
+}, {
+"base": "Reference",
+"class": "Telegram",
+"language": "GDScript",
+"path": "res://Classes/Messaging/Telegram.gd"
+}, {
+"base": "Control",
+"class": "UIControl",
+"language": "GDScript",
+"path": "res://UI/UI.gd"
+}, {
+"base": "State",
+"class": "VisitBankAndDepositGold",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/VisitBankAndDepositGold.gd"
+}, {
+"base": "State",
+"class": "VisitBathroom",
+"language": "GDScript",
+"path": "res://Game/Entities/MinersWife/States/VisitBathroom.gd"
+}, {
+"base": "State",
+"class": "WifesGlobalState",
+"language": "GDScript",
+"path": "res://Game/Entities/MinersWife/States/Global/WifesGlobalState.gd"
+} ]
+_global_script_class_icons={
+"BaseGameEntity": "",
+"CookStew": "",
+"CustomSorters": "",
+"DoHouseWork": "",
+"EatStew": "",
+"EnterMineAndDigForNugget": "",
+"GoHomeAndSleepTilRested": "",
+"Miner": "",
+"MinerGlobalState": "",
+"MinersWife": "",
+"PriorityQueue": "",
+"QuenchThirst": "",
+"QueueItem": "",
+"State": "",
+"StateMachine": "",
+"Telegram": "",
+"UIControl": "",
+"VisitBankAndDepositGold": "",
+"VisitBathroom": "",
+"WifesGlobalState": ""
+}
+
+[application]
+
+config/name="WestWorld"
+run/main_scene="res://WestWorld.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Enums="*res://Game/AutoLoads/Enums.gd"
+Events="*res://Game/AutoLoads/Events.gd"
+EntityManager="*res://Game/AutoLoads/EntityManager.gd"
+MessageDispatcher="*res://Game/AutoLoads/MessageDispatcher.gd"
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
