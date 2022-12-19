@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Game/Entities/Location/Location.gd" type="Script" id=1]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+albedo_color = Color( 0.388235, 0.376471, 0.235294, 1 )
+
+[node name="Location" type="Spatial"]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 1 )
+
+[node name="Model" type="CSGBox" parent="."]
+material = SubResource( 1 )
+
+[node name="NameLabel" type="Label3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00602883, 1.79032, 0 )
+pixel_size = 0.03
+modulate = Color( 0, 0, 0, 1 )
+uppercase = true
+
+[node name="Tweens" type="Spatial" parent="."]

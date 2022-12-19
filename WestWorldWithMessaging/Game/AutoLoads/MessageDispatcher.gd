@@ -9,7 +9,7 @@ func discharge(receiver: BaseGameEntity, telegram: Telegram):
 	receiver.handle_message(telegram)
 
 func dispatch_message(delay: float, sender: int, receiver: int, message: int, additional_info):
-	var receiving_entity: BaseGameEntity = EntityManager.get_entity_from_id(receiver);
+	var receiving_entity: BaseGameEntity = PersonManager.get_entity_from_id(receiver);
 	
 	if receiving_entity == null:
 		printerr("Warning: No receiver with ID of %s found", [receiver])

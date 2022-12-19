@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://UI/ConsoleText.gd" type="Script" id=1]
 [ext_resource path="res://WestWorld.gd" type="Script" id=2]
@@ -6,32 +6,28 @@
 [ext_resource path="res://Game/Entities/Miner/Miner.tscn" type="PackedScene" id=4]
 [ext_resource path="res://UI/PauseLabel.gd" type="Script" id=5]
 [ext_resource path="res://UI/UI.gd" type="Script" id=6]
+[ext_resource path="res://Game/Entities/Location/Location.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Game/AutoLoads/PersonManager.gd" type="Script" id=8]
+[ext_resource path="res://Game/AutoLoads/LocationManager.gd" type="Script" id=9]
+[ext_resource path="res://MinersStats.gd" type="Script" id=10]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.262745, 0.541176, 0.278431, 1 )
 
 [node name="WestWorld" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="Tick" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="Miner" parent="." instance=ExtResource( 4 )]
-speech_color = Color( 0.223529, 1, 0.0352941, 1 )
-
-[node name="MinersWife" parent="." instance=ExtResource( 3 )]
-speech_color = Color( 0.768627, 0, 0.984314, 1 )
-
-[node name="Camera" type="Camera" parent="."]
-
 [node name="UI" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 500.0
 script = ExtResource( 6 )
 tick_node_path = NodePath("../Tick")
 
 [node name="Background" type="ColorRect" parent="UI"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0.513726 )
 
 [node name="Console" type="MarginContainer" parent="UI"]
 anchor_right = 1.0
@@ -43,7 +39,7 @@ margin_bottom = -15.0
 
 [node name="Text" type="RichTextLabel" parent="UI/Console"]
 margin_right = 994.0
-margin_bottom = 570.0
+margin_bottom = 70.0
 bbcode_enabled = true
 scroll_following = true
 script = ExtResource( 1 )
@@ -57,8 +53,106 @@ margin_right = -29.0
 margin_bottom = 46.0
 bbcode_enabled = true
 bbcode_text = "[color=#ff0000]Paused[/color]"
-text = "Paused"
 script = ExtResource( 5 )
 ui_path = NodePath("..")
+
+[node name="MinersStats" type="Panel" parent="UI"]
+margin_left = 10.0
+margin_top = -490.0
+margin_right = 100.0
+margin_bottom = -385.0
+rect_scale = Vector2( 1.73175, 1.7207 )
+script = ExtResource( 10 )
+miners_node_path = NodePath("../../People/Bob")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MinersStats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = 10.0
+margin_bottom = 32.0
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="UI/MinersStats/VBoxContainer"]
+margin_right = 80.0
+margin_bottom = 14.0
+text = "Bob's Stats:"
+
+[node name="GoldLabel" type="Label" parent="UI/MinersStats/VBoxContainer"]
+margin_top = 18.0
+margin_right = 80.0
+margin_bottom = 32.0
+text = "Gold:"
+
+[node name="BankedLabel" type="Label" parent="UI/MinersStats/VBoxContainer"]
+margin_top = 36.0
+margin_right = 80.0
+margin_bottom = 50.0
+text = "Banked:"
+
+[node name="ThirstLabel" type="Label" parent="UI/MinersStats/VBoxContainer"]
+margin_top = 54.0
+margin_right = 80.0
+margin_bottom = 68.0
+text = "Thirst:"
+
+[node name="FatigueLabel" type="Label" parent="UI/MinersStats/VBoxContainer"]
+margin_top = 72.0
+margin_right = 80.0
+margin_bottom = 86.0
+text = "Fatigue:"
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="LocationManager" type="Node" parent="Managers"]
+script = ExtResource( 9 )
+
+[node name="PersonManager" type="Node" parent="Managers"]
+script = ExtResource( 8 )
+
+[node name="Tick" type="Timer" parent="."]
+autostart = true
+
+[node name="Camera" type="Camera" parent="."]
+
+[node name="Sun" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 9 )
+
+[node name="Ground" type="Spatial" parent="."]
+transform = Transform( 23, 0, 0, 0, 14, 0, 0, 0, 1, 0, 0, -20 )
+
+[node name="CSGBox" type="CSGBox" parent="Ground"]
+material = SubResource( 1 )
+
+[node name="Locations" type="Spatial" parent="."]
+
+[node name="Gold Mine" parent="Locations" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, 15, 0, -18 )
+location_key = 1
+color = Color( 0.0235294, 0.286275, 0.368627, 1 )
+
+[node name="Shack" parent="Locations" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, 8, -18 )
+color = Color( 0.431373, 0.345098, 0.180392, 1 )
+
+[node name="Saloon" parent="Locations" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -15, 0, -18 )
+location_key = 3
+color = Color( 0.105882, 0.0941176, 0.0745098, 1 )
+
+[node name="Bank" parent="Locations" instance=ExtResource( 7 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -4, -9, -18 )
+location_key = 2
+color = Color( 0.160784, 0.784314, 0.0901961, 1 )
+
+[node name="People" type="Spatial" parent="."]
+
+[node name="Bob" parent="People" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.75543, 7.09924, -15 )
+speech_color = Color( 0.0352941, 0.435294, 1, 1 )
+
+[node name="Elsa" parent="People" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.7012, 8.37429, -15 )
+speech_color = Color( 0.768627, 0, 0.984314, 1 )
 
 [connection signal="timeout" from="Tick" to="." method="_on_Timer_timeout"]

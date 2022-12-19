@@ -1,5 +1,7 @@
 extends Node
 
+class_name EntityManager
+
 var entity_map
 
 func init():

@@ -10,12 +10,13 @@ enum state_keys {
 	VISIT_BANK_AND_DEPOSIT_GOLD,
 	GO_HOME_AND_SLEEP_TIL_RESTED,
 	QUENCH_THIRST,
-	EAT_STEW
+	EAT_STEW,
+	TRAVEL_TO_LOCATION
 }
 
 const comfort_level = 5
 const max_nuggets = 3
-const thirst_level = 5
+const thirst_level = 15
 const tiredness_threshold = 5
 
 var _location: int
@@ -23,7 +24,7 @@ var _gold: int
 var _banked: int
 var _thirst: int
 var _fatigue: int
-
+var _destination: int
 
 onready var _state_machine;
 
@@ -33,7 +34,8 @@ onready var _states = {
 	state_keys.VISIT_BANK_AND_DEPOSIT_GOLD: $StateMachine/States/VisitBankAndDepositGold,
 	state_keys.GO_HOME_AND_SLEEP_TIL_RESTED: $StateMachine/States/GoHomeAndSleepTilRested,
 	state_keys.QUENCH_THIRST: $StateMachine/States/QuenchThirst,
-	state_keys.EAT_STEW: $StateMachine/States/EatStew
+	state_keys.EAT_STEW: $StateMachine/States/EatStew,
+	state_keys.TRAVEL_TO_LOCATION: $StateMachine/States/TravelToLocation
 }
 
 func init(id: int):
@@ -45,6 +47,7 @@ func init(id: int):
 	_fatigue = 0
 	
 func _ready():
+	$MinerLabel.text = name
 	_state_machine = $StateMachine
 	_state_machine.init(self)
 	
@@ -65,6 +68,12 @@ func handle_message(telegram: Telegram):
 
 func get_location():
 	return _location
+	
+func get_destination():
+	return _destination
+	
+func set_destination(destination: int):
+	_destination = destination
 	
 func change_location(new_location):
 	_location = new_location;

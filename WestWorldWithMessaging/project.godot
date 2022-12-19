@@ -39,10 +39,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Game/Entities/Miner/States/EnterMineAndDigForNugget.gd"
 }, {
+"base": "Node",
+"class": "EntityManager",
+"language": "GDScript",
+"path": "res://Classes/Managers/EntityManager.gd"
+}, {
 "base": "State",
 "class": "GoHomeAndSleepTilRested",
 "language": "GDScript",
 "path": "res://Game/Entities/Miner/States/GoHomeAndSleepTilRested.gd"
+}, {
+"base": "BaseGameEntity",
+"class": "Location",
+"language": "GDScript",
+"path": "res://Game/Entities/Location/Location.gd"
 }, {
 "base": "BaseGameEntity",
 "class": "Miner",
@@ -89,6 +99,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Classes/Messaging/Telegram.gd"
 }, {
+"base": "State",
+"class": "TravelToLocation",
+"language": "GDScript",
+"path": "res://Game/Entities/Miner/States/TravelToLocation.gd"
+}, {
 "base": "Control",
 "class": "UIControl",
 "language": "GDScript",
@@ -116,7 +131,9 @@ _global_script_class_icons={
 "DoHouseWork": "",
 "EatStew": "",
 "EnterMineAndDigForNugget": "",
+"EntityManager": "",
 "GoHomeAndSleepTilRested": "",
+"Location": "",
 "Miner": "",
 "MinerGlobalState": "",
 "MinersWife": "",
@@ -126,6 +143,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Telegram": "",
+"TravelToLocation": "",
 "UIControl": "",
 "VisitBankAndDepositGold": "",
 "VisitBathroom": "",
@@ -142,8 +160,9 @@ config/icon="res://icon.png"
 
 Enums="*res://Game/AutoLoads/Enums.gd"
 Events="*res://Game/AutoLoads/Events.gd"
-EntityManager="*res://Game/AutoLoads/EntityManager.gd"
 MessageDispatcher="*res://Game/AutoLoads/MessageDispatcher.gd"
+LocationManager="*res://Game/AutoLoads/LocationManager.gd"
+PersonManager="*res://Game/AutoLoads/PersonManager.gd"
 
 [gui]
 

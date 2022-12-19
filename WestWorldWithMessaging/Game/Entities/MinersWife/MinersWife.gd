@@ -29,6 +29,7 @@ func init(id: int):
 	_cooking = false
 	
 func _ready():
+	$MinersWifeLabel.text = name
 	_state_machine = $StateMachine
 	_state_machine.init(self)
 	

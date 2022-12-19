@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Classes/StateMachine/StateMachine.gd" type="Script" id=1]
 [ext_resource path="res://Game/Entities/MinersWife/States/Global/WifesGlobalState.gd" type="Script" id=2]
@@ -6,6 +6,10 @@
 [ext_resource path="res://Game/Entities/MinersWife/MinersWife.gd" type="Script" id=4]
 [ext_resource path="res://Game/Entities/MinersWife/States/DoHouseWork.gd" type="Script" id=5]
 [ext_resource path="res://Game/Entities/MinersWife/States/CookStew.gd" type="Script" id=6]
+
+[sub_resource type="SpatialMaterial" id=1]
+resource_local_to_scene = true
+albedo_color = Color( 1, 0, 0.894118, 1 )
 
 [node name="MinersWife" type="Spatial"]
 script = ExtResource( 4 )
@@ -28,3 +32,12 @@ script = ExtResource( 3 )
 
 [node name="CookStew" type="Node" parent="StateMachine/States"]
 script = ExtResource( 6 )
+
+[node name="CSGSphere" type="CSGSphere" parent="."]
+material = SubResource( 1 )
+
+[node name="MinersWifeLabel" type="Label3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.74999, 0 )
+pixel_size = 0.04
+modulate = Color( 0, 0, 0, 1 )
+text = "Miners Wife"
