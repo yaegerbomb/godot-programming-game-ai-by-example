@@ -53,6 +53,7 @@ margin_right = -29.0
 margin_bottom = 46.0
 bbcode_enabled = true
 bbcode_text = "[color=#ff0000]Paused[/color]"
+text = "Paused"
 script = ExtResource( 5 )
 ui_path = NodePath("..")
 

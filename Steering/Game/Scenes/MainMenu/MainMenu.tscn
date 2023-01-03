@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Game/Scenes/MainMenu/MainMenu.gd" type="Script" id=1]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+margin_right = 984.0
+margin_bottom = 560.0
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 401.0
+margin_top = 90.0
+margin_right = 583.0
+margin_bottom = 470.0
+custom_constants/separation = 20
+
+[node name="SeekSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_right = 182.0
+margin_bottom = 20.0
+text = "Seek Demo"
+
+[node name="FleeSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 40.0
+margin_right = 182.0
+margin_bottom = 60.0
+text = "Flee Demo"
+
+[node name="ArriveSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 80.0
+margin_right = 182.0
+margin_bottom = 100.0
+text = "Arrive Demo"
+
+[node name="PursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 120.0
+margin_right = 182.0
+margin_bottom = 140.0
+text = "Pursuit Demo"
+
+[node name="OffsetPursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 160.0
+margin_right = 182.0
+margin_bottom = 180.0
+text = "Offset Pursuit Demo"
+
+[node name="WanderSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 200.0
+margin_right = 182.0
+margin_bottom = 220.0
+text = "Wander Demo"
+
+[node name="ObstacleAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 240.0
+margin_right = 182.0
+margin_bottom = 260.0
+text = "Obstacle Avoidance Demo"
+
+[node name="WallAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 280.0
+margin_right = 182.0
+margin_bottom = 300.0
+text = "Wall Avoidance Demo"
+
+[node name="HideSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 320.0
+margin_right = 182.0
+margin_bottom = 340.0
+text = "Hide Demo"
+
+[node name="FollowPathButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+margin_top = 360.0
+margin_right = 182.0
+margin_bottom = 380.0
+text = "Follow Path Demo"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/SeekSceneButton" to="." method="_on_SeekSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/FleeSceneButton" to="." method="_on_FleeSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/ArriveSceneButton" to="." method="_on_ArriveSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/PursuitSceneButton" to="." method="_on_PursuitSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/OffsetPursuitSceneButton" to="." method="_on_OffsetPursuitSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/WanderSceneButton" to="." method="_on_WanderSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/ObstacleAvoidanceSceneButton" to="." method="_on_ObstacleAvoidanceSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/WallAvoidanceSceneButton" to="." method="_on_WallAvoidanceSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/HideSceneButton" to="." method="_on_HideSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/FollowPathButton" to="." method="_on_FollowPathButton_pressed"]
