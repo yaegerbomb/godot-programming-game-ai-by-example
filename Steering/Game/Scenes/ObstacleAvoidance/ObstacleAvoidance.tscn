@@ -4,10 +4,12 @@
 [ext_resource path="res://Game/Entities/Walls/Wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Game/GUI/DEBUG/DebugGUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Game/Entities/Vehicle/Vehicle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Game/Helpers/MouseTarget.gd" type="Script" id=5]
-[ext_resource path="res://Game/Entities/Vehicle/Ext/Arriver.gd" type="Script" id=6]
+[ext_resource path="res://Game/Entities/Vehicle/Ext/ObstacleAvoider.gd" type="Script" id=5]
+[ext_resource path="res://Game/Helpers/Disabled.gd" type="Script" id=6]
 [ext_resource path="res://Game/Cameras/RTSCamera.gd" type="Script" id=7]
-[ext_resource path="res://Game/Entities/Obstacle/Obstacle.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Game/GUI/DEBUG/Ext/DebugGUIWallAvoidance.gd" type="Script" id=8]
+[ext_resource path="res://Game/Entities/Vehicle/Ext/Wander.gd" type="Script" id=9]
+[ext_resource path="res://Game/Entities/Obstacle/Obstacle.tscn" type="PackedScene" id=10]
 
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 20, 1, 20 )
@@ -18,15 +20,6 @@ albedo_color = Color( 0, 0, 0, 1 )
 [sub_resource type="CubeMesh" id=8]
 material = SubResource( 9 )
 size = Vector3( 40, 2, 40 )
-
-[sub_resource type="SpatialMaterial" id=4]
-albedo_color = Color( 0.321569, 0.831373, 0.223529, 1 )
-
-[sub_resource type="CylinderMesh" id=5]
-material = SubResource( 4 )
-top_radius = 2.0
-bottom_radius = 2.0
-height = 0.1
 
 [node name="SteeringWorld" type="Spatial"]
 
@@ -53,6 +46,35 @@ transform = Transform( -4.37114e-08, 0, 19.8, 0, 6, 0, -1, 0, -8.65485e-07, -0.3
 [node name="BottomWall" parent="Walls" instance=ExtResource( 2 )]
 transform = Transform( -4.37114e-08, 0, 19.8, 0, 6, 0, -1, 0, -8.65485e-07, -0.324499, 2, 18.8779 )
 
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="Obstacle" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 0, 0 )
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0 )
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11 )
+
+[node name="Obstacle6" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -11, 0, -11 )
+
+[node name="Obstacle7" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 10, 0, -11 )
+
+[node name="Obstacle8" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 10, 0, 10 )
+
+[node name="Obstacle9" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, -11, 0, 10 )
+
+[node name="Obstacle4" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10 )
+
+[node name="Obstacle5" parent="Obstacles" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0 )
+
 [node name="Cameras" type="Spatial" parent="."]
 
 [node name="RTSCamera" type="Camera" parent="Cameras"]
@@ -62,40 +84,193 @@ script = ExtResource( 7 )
 
 [node name="RayCast" type="RayCast" parent="Cameras/RTSCamera"]
 cast_to = Vector3( 0, 0, 0 )
-
-[node name="MouseTarget" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.76837e-07, -0.7, -4.76837e-07 )
-script = ExtResource( 5 )
-model_path = NodePath("Model")
-
-[node name="Model" type="MeshInstance" parent="MouseTarget"]
-mesh = SubResource( 5 )
-
-[node name="Obstacles" type="Spatial" parent="."]
-
-[node name="Obstacle" parent="Obstacles" instance=ExtResource( 8 )]
-transform = Transform( 1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 1, -0.752575, -9 )
-
-[node name="Obstacle4" parent="Obstacles" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, -0.752575, -9 )
-
-[node name="Obstacle2" parent="Obstacles" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7, -0.752575, -1 )
-
-[node name="Obstacle3" parent="Obstacles" instance=ExtResource( 8 )]
-transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -3, -0.752575, 7 )
+collision_mask = 3
 
 [node name="Agents" type="Spatial" parent="."]
 
-[node name="Arriver" parent="Agents" instance=ExtResource( 4 )]
-script = ExtResource( 6 )
-max_speed = 2.0
-max_force = 2.0
+[node name="ObstacleAvoider" parent="Agents" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -3 )
+script = ExtResource( 5 )
+velocity = Vector3( 0, 0, -2 )
+color = Color( 0.0823529, 0.690196, 0.0313726, 1 )
+
+[node name="Wanderer" parent="Agents" instance=ExtResource( 4 )]
+script = ExtResource( 9 )
 color = Color( 0.721569, 0.0431373, 0.0431373, 1 )
 
 [node name="DebugGUI" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 8 )
+agent_path = NodePath("../Agents/ObstacleAvoider")
+
+[node name="DebugButtons" parent="DebugGUI" index="1"]
+margin_right = 310.0
+
+[node name="VList" parent="DebugGUI/DebugButtons/MarginContainer" index="0"]
+margin_right = 287.0
+margin_bottom = 226.0
+custom_constants/separation = 20
+
+[node name="PauseMovementToggle" parent="DebugGUI/DebugButtons/MarginContainer/VList" index="1"]
+margin_right = 287.0
+
+[node name="PositionContainer" type="VBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList" index="2"]
+margin_top = 60.0
+margin_right = 287.0
+margin_bottom = 113.0
+custom_constants/separation = 15
+
+[node name="Position" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer"]
+margin_right = 287.0
+margin_bottom = 14.0
+text = "Position:"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer"]
+margin_top = 29.0
+margin_right = 287.0
+margin_bottom = 53.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4"]
+margin_right = 93.0
+margin_bottom = 24.0
+
+[node name="X" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "x: "
+
+[node name="XValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+step = 0.25
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 24.0
+
+[node name="Y" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "y: "
+
+[node name="YValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer2"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+step = 0.25
+value = -100000.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4"]
+margin_left = 194.0
+margin_right = 287.0
+margin_bottom = 24.0
+
+[node name="Z" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "z: "
+
+[node name="ZValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+step = 0.25
+
+[node name="VelocityContainer" type="VBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList" index="3"]
+margin_top = 133.0
+margin_right = 287.0
+margin_bottom = 186.0
+custom_constants/separation = 15
+
+[node name="Velocity" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer"]
+margin_right = 287.0
+margin_bottom = 14.0
+text = "Velocity:"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer"]
+margin_top = 29.0
+margin_right = 287.0
+margin_bottom = 53.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4"]
+margin_right = 93.0
+margin_bottom = 24.0
+
+[node name="X" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "x: "
+
+[node name="VXValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4"]
+margin_left = 97.0
+margin_right = 190.0
+margin_bottom = 24.0
+
+[node name="Y" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "y: "
+
+[node name="VYValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer2"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4"]
+margin_left = 194.0
+margin_right = 287.0
+margin_bottom = 24.0
+
+[node name="Z" type="Label" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer3"]
+margin_top = 5.0
+margin_right = 15.0
+margin_bottom = 19.0
+text = "z: "
+
+[node name="VZValue" type="SpinBox" parent="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer3"]
+margin_left = 19.0
+margin_right = 93.0
+margin_bottom = 24.0
+min_value = -100000.0
+max_value = 100000.0
+
+[node name="HideButton" parent="DebugGUI/DebugButtons/MarginContainer/VList" index="4"]
+margin_top = 206.0
+margin_right = 287.0
+margin_bottom = 226.0
 
 [node name="SceneGUI" parent="." instance=ExtResource( 1 )]
-scene_title = "Obstacle Avoidance Demo"
+scene_title = "Wall Avoidance Demo"
+
+[node name="Disabled" type="Node" parent="."]
+script = ExtResource( 6 )
+
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer/XValue" to="DebugGUI" method="_on_XValue_value_changed"]
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer2/YValue" to="DebugGUI" method="_on_YValue_value_changed"]
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/PositionContainer/HBoxContainer4/HBoxContainer3/ZValue" to="DebugGUI" method="_on_ZValue_value_changed"]
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer/VXValue" to="DebugGUI" method="_on_VXValue_value_changed"]
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer2/VYValue" to="DebugGUI" method="_on_VYValue_value_changed"]
+[connection signal="value_changed" from="DebugGUI/DebugButtons/MarginContainer/VList/VelocityContainer/HBoxContainer4/HBoxContainer3/VZValue" to="DebugGUI" method="_on_VZValue_value_changed"]
 
 [editable path="DebugGUI"]

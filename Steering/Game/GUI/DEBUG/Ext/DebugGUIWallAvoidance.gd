@@ -19,7 +19,7 @@ func _ready():
 	connect_signals()
 	
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	mouse_position.y = agent.global_translation.y
 	if left_drag:
 		agent.global_translation = mouse_position
@@ -46,7 +46,7 @@ func connect_signals():
 		
 		
 	var error_code_right_click = Signals.connect("on_right_click", self, "on_right_click")
-	if error_code_left_click != 0:
+	if error_code_right_click != 0:
 		print("ERROR: ", error_code_left_click)
 		
 	var error_code_left_click_release = Signals.connect("on_left_click_released", self, "on_left_click_released")
@@ -54,7 +54,7 @@ func connect_signals():
 		print("ERROR: ", error_code_left_click_release)
 		
 	var error_code_right_click_release = Signals.connect("on_right_click_released", self, "on_right_click_released")
-	if error_code_left_click_release != 0:
+	if error_code_right_click_release != 0:
 		print("ERROR: ", error_code_left_click_release)
 		
 	var error_code_mouse_move = Signals.connect("on_mouse_move", self, "on_mouse_move")

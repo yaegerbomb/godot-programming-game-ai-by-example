@@ -23,6 +23,7 @@ onready var front_feeler = $Feelers/Front
 onready var left_feeler = $Feelers/Left
 onready var right_feeler = $Feelers/Right
 onready var ai_path = $AIPath
+onready var obstacle_raycast = $ObstacleRaycast
 
 var move_debug: bool = false
 var delta: float = 0;

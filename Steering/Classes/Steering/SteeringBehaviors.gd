@@ -95,51 +95,30 @@ static func wander(vehicle: KinematicBody):
 	return true_target - vehicle.global_translation
 
 static func avoid_obstacles(vehicle):
-	var obstacles = vehicle.obstacle_detection_box.get_overlapping_bodies()
-	
-	var closes_intersecting_obstacle
-	
-	var distance_to_closest_ip: float = 1.79769e308
-	
-	var local_position_of_closest_obstacle: Vector3
-	
-	var vehicle_obstacle_detection_radius = vehicle.obstacle_detection_box.get_radius() 
-	
-	for obstacle in obstacles:
-		var local_position = vehicle.to_local(obstacle.global_translation)
-		
-		if local_position.x >= 0 or local_position.z <= 0:
-			var expanded_radius = obstacle.get_radius() + vehicle_obstacle_detection_radius
-			if abs(local_position.z) < expanded_radius:
-				var c_x = local_position.x
-				var c_z = local_position.z
-				
-				var sqrt_part = sqrt(expanded_radius * expanded_radius - c_z * c_z)
-				
-				var ip = c_x - sqrt_part
-				
-				if ip < 0.0:
-					ip = c_x + sqrt_part
-					
-				if ip < distance_to_closest_ip:
-					distance_to_closest_ip = ip
-					closes_intersecting_obstacle = obstacle
-					local_position_of_closest_obstacle = local_position
+	var obstacles = vehicle.obstacle_detection_box.get_overlapping_bodies()	
 	
 	var steering_force: Vector3
 	
-	if closes_intersecting_obstacle:
-		var multiplier: float = 1.0 + (vehicle_obstacle_detection_radius - local_position_of_closest_obstacle.x) / vehicle_obstacle_detection_radius
-		var closes_intersecting_obstacle_radius = closes_intersecting_obstacle.get_radius()
-		steering_force.z = (closes_intersecting_obstacle_radius + local_position_of_closest_obstacle.z) * multiplier
-	
-		var braking_weight: float = 0.2
-			
-		steering_force.x = (closes_intersecting_obstacle_radius - local_position_of_closest_obstacle.x) * braking_weight
-	
-		steering_force.y = 0
-		steering_force = vehicle.transform.xform(steering_force)
+	for obstacle in obstacles:
+		var z_vector = vehicle.global_transform.basis.z
+		var relative_pos = obstacle.global_translation - vehicle.global_translation
+
+		var dot = z_vector.dot(relative_pos)		
 		
+		var local_position = vehicle.to_local(obstacle.global_translation)
+		
+		if dot <= 0:
+		
+			var ray_cast: RayCast = vehicle.obstacle_raycast
+			
+			ray_cast.cast_to = local_position
+		
+			if ray_cast.is_colliding():
+				var over_shoot: Vector3 = ray_cast.global_translation - ray_cast.get_collision_point()
+				print("over_shoot", over_shoot)
+				var closest_obstacle_normal = ray_cast.get_collision_normal()
+				steering_force += closest_obstacle_normal * over_shoot.length()
+
 	return steering_force
 
 static func wall_avoidance(vehicle):
