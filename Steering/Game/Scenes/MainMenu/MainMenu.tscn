@@ -19,79 +19,136 @@ margin_bottom = -20.0
 margin_right = 984.0
 margin_bottom = 560.0
 
-[node name="ButtonContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer"]
-margin_left = 401.0
-margin_top = 90.0
-margin_right = 583.0
-margin_bottom = 470.0
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/CenterContainer"]
+margin_left = 315.0
+margin_top = 53.0
+margin_right = 669.0
+margin_bottom = 507.0
+custom_constants/separation = 50
+
+[node name="SteeringDemoButtonContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/HBoxContainer"]
+margin_right = 182.0
+margin_bottom = 454.0
 custom_constants/separation = 20
 
-[node name="SeekSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
 margin_right = 182.0
-margin_bottom = 20.0
+margin_bottom = 14.0
+text = "Steering Demos"
+
+[node name="SeekSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 34.0
+margin_right = 182.0
+margin_bottom = 54.0
 text = "Seek Demo"
 
-[node name="FleeSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 40.0
+[node name="FleeSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 74.0
 margin_right = 182.0
-margin_bottom = 60.0
+margin_bottom = 94.0
 text = "Flee Demo"
 
-[node name="ArriveSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 80.0
+[node name="ArriveSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 114.0
 margin_right = 182.0
-margin_bottom = 100.0
+margin_bottom = 134.0
 text = "Arrive Demo"
 
-[node name="PursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 120.0
+[node name="EvadeSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 154.0
 margin_right = 182.0
-margin_bottom = 140.0
+margin_bottom = 174.0
+text = "Evade Demo"
+
+[node name="PursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 194.0
+margin_right = 182.0
+margin_bottom = 214.0
 text = "Pursuit Demo"
 
-[node name="OffsetPursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 160.0
+[node name="OffsetPursuitSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 234.0
 margin_right = 182.0
-margin_bottom = 180.0
+margin_bottom = 254.0
 text = "Offset Pursuit Demo"
 
-[node name="WanderSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 200.0
+[node name="WanderSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 274.0
 margin_right = 182.0
-margin_bottom = 220.0
+margin_bottom = 294.0
 text = "Wander Demo"
 
-[node name="ObstacleAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 240.0
+[node name="ObstacleAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 314.0
 margin_right = 182.0
-margin_bottom = 260.0
+margin_bottom = 334.0
 text = "Obstacle Avoidance Demo"
 
-[node name="WallAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 280.0
+[node name="WallAvoidanceSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 354.0
 margin_right = 182.0
-margin_bottom = 300.0
+margin_bottom = 374.0
 text = "Wall Avoidance Demo"
 
-[node name="HideSceneButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 320.0
+[node name="HideSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 394.0
 margin_right = 182.0
-margin_bottom = 340.0
+margin_bottom = 414.0
 text = "Hide Demo"
 
-[node name="FollowPathButton" type="Button" parent="MarginContainer/CenterContainer/ButtonContainer"]
-margin_top = 360.0
+[node name="FollowPathButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer"]
+margin_top = 434.0
 margin_right = 182.0
-margin_bottom = 380.0
+margin_bottom = 454.0
 text = "Follow Path Demo"
 
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/SeekSceneButton" to="." method="_on_SeekSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/FleeSceneButton" to="." method="_on_FleeSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/ArriveSceneButton" to="." method="_on_ArriveSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/PursuitSceneButton" to="." method="_on_PursuitSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/OffsetPursuitSceneButton" to="." method="_on_OffsetPursuitSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/WanderSceneButton" to="." method="_on_WanderSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/ObstacleAvoidanceSceneButton" to="." method="_on_ObstacleAvoidanceSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/WallAvoidanceSceneButton" to="." method="_on_WallAvoidanceSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/HideSceneButton" to="." method="_on_HideSceneButton_pressed"]
-[connection signal="pressed" from="MarginContainer/CenterContainer/ButtonContainer/FollowPathButton" to="." method="_on_FollowPathButton_pressed"]
+[node name="FlockingDemoButtonContainer" type="VBoxContainer" parent="MarginContainer/CenterContainer/HBoxContainer"]
+margin_left = 232.0
+margin_right = 354.0
+margin_bottom = 454.0
+custom_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer"]
+margin_right = 122.0
+margin_bottom = 14.0
+text = "Flocking Demos"
+
+[node name="SeparationSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer"]
+margin_top = 34.0
+margin_right = 122.0
+margin_bottom = 54.0
+text = "Separation Demo"
+
+[node name="AlignmentSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer"]
+margin_top = 74.0
+margin_right = 122.0
+margin_bottom = 94.0
+text = "Alignment Demo"
+
+[node name="CohesionSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer"]
+margin_top = 114.0
+margin_right = 122.0
+margin_bottom = 134.0
+text = "Cohesion Demo"
+
+[node name="FlockingSceneButton" type="Button" parent="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer"]
+margin_top = 154.0
+margin_right = 122.0
+margin_bottom = 174.0
+text = "Flocking Demo"
+
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/SeekSceneButton" to="." method="_on_SeekSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/FleeSceneButton" to="." method="_on_FleeSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/ArriveSceneButton" to="." method="_on_ArriveSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/EvadeSceneButton" to="." method="_on_EvadeSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/PursuitSceneButton" to="." method="_on_PursuitSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/OffsetPursuitSceneButton" to="." method="_on_OffsetPursuitSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/WanderSceneButton" to="." method="_on_WanderSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/ObstacleAvoidanceSceneButton" to="." method="_on_ObstacleAvoidanceSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/WallAvoidanceSceneButton" to="." method="_on_WallAvoidanceSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/HideSceneButton" to="." method="_on_HideSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/SteeringDemoButtonContainer/FollowPathButton" to="." method="_on_FollowPathButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer/SeparationSceneButton" to="." method="_on_SeparationSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer/AlignmentSceneButton" to="." method="_on_AlignmentSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer/CohesionSceneButton" to="." method="_on_CohesionSceneButton_pressed"]
+[connection signal="pressed" from="MarginContainer/CenterContainer/HBoxContainer/FlockingDemoButtonContainer/FlockingSceneButton" to="." method="_on_FlockingSceneButton_pressed"]

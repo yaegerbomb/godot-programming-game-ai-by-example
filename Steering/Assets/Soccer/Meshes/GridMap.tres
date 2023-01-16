@@ -1,0 +1,15 @@
+[gd_resource type="MeshLibrary" load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.180392, 0.447059, 0.670588, 0.678431 )
+
+[sub_resource type="CubeMesh" id=2]
+material = SubResource( 1 )
+size = Vector3( 8, 1, 14 )
+
+[resource]
+item/0/name = ""
+item/0/mesh = SubResource( 2 )
+item/0/mesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+item/0/shapes = [  ]
+item/0/navmesh_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )

@@ -25,9 +25,14 @@ _global_script_classes=[ {
 "path": "res://Game/GUI/DEBUG/GUI.gd"
 }, {
 "base": "Area",
-"class": "DetectionBox",
+"class": "DetectionArea",
 "language": "GDScript",
-"path": "res://Game/Entities/Vehicle/Helpers/DetectionBox.gd"
+"path": "res://Game/Entities/Vehicle/Helpers/DetectionArea.gd"
+}, {
+"base": "Spatial",
+"class": "Goal",
+"language": "GDScript",
+"path": "res://Game/Entities/Goals/Goal.gd"
 }, {
 "base": "BaseGameEntity",
 "class": "MovingEntity",
@@ -38,6 +43,21 @@ _global_script_classes=[ {
 "class": "Obstacle",
 "language": "GDScript",
 "path": "res://Game/Entities/Obstacle/Obstacle.gd"
+}, {
+"base": "KinematicBody",
+"class": "SoccerBall",
+"language": "GDScript",
+"path": "res://Game/Entities/SoccerBall/SoccerBall.gd"
+}, {
+"base": "Spatial",
+"class": "SoccerSimulation",
+"language": "GDScript",
+"path": "res://Game/Scenes/Soccer/Soccer.gd"
+}, {
+"base": "Node",
+"class": "SteeringBehaviorUtils",
+"language": "GDScript",
+"path": "res://Classes/Steering/Helpers/Utils.gd"
 }, {
 "base": "Node",
 "class": "SteeringBehaviors",
@@ -58,9 +78,13 @@ _global_script_class_icons={
 "AIPath": "",
 "BaseGameEntity": "",
 "DebugGUI": "",
-"DetectionBox": "",
+"DetectionArea": "",
+"Goal": "",
 "MovingEntity": "",
 "Obstacle": "",
+"SoccerBall": "",
+"SoccerSimulation": "",
+"SteeringBehaviorUtils": "",
 "SteeringBehaviors": "",
 "Vehicle": "",
 "Wall": ""
@@ -76,6 +100,7 @@ config/icon="res://icon.png"
 
 Signals="*res://Game/AutoLoads/Signals.gd"
 DebugDraw="*res://addons/debug_draw_3d/debug_draw.gd"
+Enums="*res://Game/AutoLoads/Enums.gd"
 
 [gui]
 
@@ -144,6 +169,9 @@ scroll_wheel_down={
 3d_physics/layer_1="Walls"
 3d_physics/layer_2="Obstacles"
 3d_physics/layer_3="Agents"
+3d_physics/layer_4="Sharks"
+3d_physics/layer_5="Balls"
+3d_physics/layer_6="Goals"
 
 [physics]
 

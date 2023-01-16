@@ -1,0 +1,77 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Game/GUI/SceneGUI.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Game/Entities/Walls/Wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Game/GUI/DEBUG/DebugGUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Game/Entities/Vehicle/Ext/Alignment.gd" type="Script" id=4]
+[ext_resource path="res://Game/Cameras/RTSCamera.gd" type="Script" id=5]
+[ext_resource path="res://Game/Entities/Vehicle/Vehicle.tscn" type="PackedScene" id=6]
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 20, 1, 20 )
+
+[sub_resource type="SpatialMaterial" id=9]
+albedo_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="CubeMesh" id=8]
+material = SubResource( 9 )
+size = Vector3( 40, 2, 40 )
+
+[node name="SteeringWorld" type="Spatial"]
+
+[node name="Floor" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.75, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor"]
+shape = SubResource( 7 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Floor/CollisionShape"]
+mesh = SubResource( 8 )
+
+[node name="Walls" type="Spatial" parent="."]
+
+[node name="LeftWall" parent="Walls" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 6, 0, 0, 0, 19.8, -19.3245, 2, -0.12213 )
+
+[node name="RightWall" parent="Walls" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 6, 0, 0, 0, 19.8, 18.6755, 2, -0.12213 )
+
+[node name="TopWall" parent="Walls" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 19.8, 0, 6, 0, -1, 0, -8.65485e-07, -0.324499, 2, -19.1221 )
+
+[node name="BottomWall" parent="Walls" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 19.8, 0, 6, 0, -1, 0, -8.65485e-07, -0.324499, 2, 18.8779 )
+
+[node name="Cameras" type="Spatial" parent="."]
+
+[node name="RTSCamera" type="Camera" parent="Cameras"]
+transform = Transform( 1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 10, 4 )
+current = true
+script = ExtResource( 5 )
+
+[node name="RayCast" type="RayCast" parent="Cameras/RTSCamera"]
+cast_to = Vector3( 0, 0, 0 )
+
+[node name="Agents" type="Spatial" parent="."]
+
+[node name="Alignment1" parent="Agents" instance=ExtResource( 6 )]
+transform = Transform( 0.503065, 0, 0.864248, 0, 1, 0, -0.864248, 0, 0.503065, -0.880738, 0, 0 )
+script = ExtResource( 4 )
+
+[node name="Alignment2" parent="Agents" instance=ExtResource( 6 )]
+transform = Transform( -0.795632, 0, -0.60578, 0, 1, 0, 0.60578, 0, -0.795632, 0.379298, 0, 0.904633 )
+script = ExtResource( 4 )
+
+[node name="Alignment3" parent="Agents" instance=ExtResource( 6 )]
+transform = Transform( -0.513032, 0, -0.858369, 0, 1, 0, 0.858369, 0, -0.513032, 0.63011, 0, -0.620952 )
+script = ExtResource( 4 )
+
+[node name="Alignment4" parent="Agents" instance=ExtResource( 6 )]
+script = ExtResource( 4 )
+
+[node name="DebugGUI" parent="." instance=ExtResource( 3 )]
+
+[node name="SceneGUI" parent="." instance=ExtResource( 1 )]
+scene_title = "Alignment Demo"
+
+[editable path="DebugGUI"]

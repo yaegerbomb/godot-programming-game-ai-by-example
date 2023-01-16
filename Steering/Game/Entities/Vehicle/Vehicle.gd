@@ -12,11 +12,31 @@ export (float) var wander_radius = 4.0;
 export (float) var wander_distance = 5.0;
 export (float) var wander_jitter = 2.5;
 export (float) var waypoint_seek_distance = 2.24
+export (Enums.SummingMethod) var summing_method = Enums.SummingMethod.Prioritized
+export (
+	int,
+	FLAGS,
+	"Wall Avoidance",
+	"Obstacle Avoidance",
+	"Evade",
+	"Flee",
+	"Separation",
+	"Alignment",
+	"Cohesion",
+	"Seek",
+	"Arrive",
+	"Wander",
+	"Pursuit",
+	"Offset Pursuit",
+	"Hide",
+	"Follow Path"
+) var steering_behaviors
 
 export (NodePath) var path_path
 export (Color) var color = Color.darkgoldenrod
 
-onready var obstacle_detection_box: DetectionBox = $ObstacleDetectionBox
+onready var obstacle_detection_area: DetectionArea = $ObstacleDetectionArea
+onready var neighbor_detection_area: DetectionArea = $NeighborDetectionArea
 
 # wall feelers
 onready var front_feeler = $Feelers/Front
@@ -24,12 +44,23 @@ onready var left_feeler = $Feelers/Left
 onready var right_feeler = $Feelers/Right
 onready var ai_path = $AIPath
 onready var obstacle_raycast = $ObstacleRaycast
+onready var pursuit_vehicle: Vehicle
+onready var evade_vehicle: Vehicle
+onready var offset_pursuit_leader: Vehicle
+onready var seeking_vehicle: Vehicle
 
 var move_debug: bool = false
 var delta: float = 0;
 var wander_target: Vector3
 
 var obstacles_in_view_range = {}
+
+var steering_force: Vector3
+var seek_target: Vector3
+var flee_target: Vector3
+var arrive_target: Vector3
+var offset_pursuit_target: Vector3
+
 
 func _ready():
 	var model_material = $CollisionShape/Model.get_surface_material(0)
@@ -51,8 +82,9 @@ func _physics_process(d):
 
 func physics_process(d):
 	if(!move_debug):
-		avoid_walls(d)
-		avoid_obstacles(d)
+		SteeringBehaviors.calculate(self)
+		var acceleration = steering_force / mass
+		velocity = velocity + acceleration * d
 		velocity = velocity.limit_length(max_speed)
 		velocity.y = 0
 		velocity = move_and_slide(velocity, Vector3.UP)
@@ -66,18 +98,22 @@ func physics_process(d):
 	
 	self.delta = d;
 	var r = (velocity.length() / max_speed)
-	obstacle_detection_box.set_radius(r)
+	obstacle_detection_area.set_radius(r)
 	
-
 func on_movement_paused_toggled():
 	move_debug = !move_debug
 	
-func avoid_obstacles(d):	
-	var steering_force: Vector3 = SteeringBehaviors.avoid_obstacles(self)
-	var acceleration: Vector3 = steering_force / mass
-	velocity = velocity + acceleration * d
+
+func steering_behavior_enabled(behavior):
+	var bitmask = 1
+	bitmask = bitmask ^ behavior
+	if steering_behaviors & behavior:
+		return true
+		
+	return false
 	
-func avoid_walls(d):
-	var steering_force: Vector3 = SteeringBehaviors.wall_avoidance(self)
-	var acceleration: Vector3 = steering_force / mass
-	velocity = velocity + acceleration * d
+func enable_steering_behavior(behavior):
+	steering_behaviors = steering_behaviors | behavior
+	
+func disable_steering_behavior(behavior):
+	steering_behaviors = steering_behaviors & ~behavior

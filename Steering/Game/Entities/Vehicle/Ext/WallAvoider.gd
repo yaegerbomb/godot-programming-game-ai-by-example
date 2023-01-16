@@ -13,7 +13,7 @@ func physics_process(d):
 	
 	self.delta = d;
 	var r = (velocity.length() / max_speed)
-	obstacle_detection_box.set_radius(r)
+	obstacle_detection_area.set_radius(r)
 	
 func avoid_walls(d):
 	var steering_force: Vector3 = SteeringBehaviors.wall_avoidance(self)

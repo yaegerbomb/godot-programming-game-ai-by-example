@@ -1,6 +1,6 @@
 extends Area
 
-class_name DetectionBox
+class_name DetectionArea
 
 export (NodePath) var parent_body
 onready var parent_body_node = get_node(parent_body)

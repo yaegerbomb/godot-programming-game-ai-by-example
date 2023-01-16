@@ -1,0 +1,101 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Game/Entities/Vehicle/Vehicle.gd" type="Script" id=1]
+[ext_resource path="res://Game/Helpers/Disabled.gd" type="Script" id=2]
+[ext_resource path="res://Game/Entities/Vehicle/Helpers/DetectionArea.gd" type="Script" id=3]
+[ext_resource path="res://Classes/Steering/Helpers/AIPath.gd" type="Script" id=4]
+
+[sub_resource type="CapsuleShape" id=2]
+radius = 0.25
+
+[sub_resource type="CapsuleMesh" id=3]
+radius = 0.25
+
+[sub_resource type="SpatialMaterial" id=4]
+resource_local_to_scene = true
+albedo_color = Color( 0.721569, 0.52549, 0.0431373, 1 )
+
+[sub_resource type="PrismMesh" id=5]
+size = Vector3( 0.3, 0.3, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=6]
+resource_local_to_scene = true
+albedo_color = Color( 0.721569, 0.52549, 0.0431373, 1 )
+
+[sub_resource type="CylinderShape" id=9]
+height = 2.5
+radius = 0.75
+
+[sub_resource type="CylinderShape" id=10]
+height = 1.5
+
+[node name="Shark" type="KinematicBody"]
+collision_layer = 8
+collision_mask = 3
+axis_lock_motion_y = true
+move_lock_y = true
+script = ExtResource( 1 )
+steering_behaviors = 515
+color = Color( 0.721569, 0.0431373, 0.0431373, 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+shape = SubResource( 2 )
+
+[node name="Model" type="MeshInstance" parent="CollisionShape"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00546741, -0.000238672, -2.38408e-07 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="Direction" type="MeshInstance" parent="CollisionShape/Model"]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, -0.348502, -0.390462 )
+mesh = SubResource( 5 )
+skeleton = NodePath("")
+material/0 = SubResource( 6 )
+
+[node name="AIPath" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="ObstacleRaycast" type="RayCast" parent="."]
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 2
+debug_shape_custom_color = Color( 1, 0, 0.866667, 1 )
+
+[node name="ObstacleDetectionArea" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 3 )
+parent_body = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="ObstacleDetectionArea"]
+shape = SubResource( 9 )
+
+[node name="Disabled" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="Feelers" type="Spatial" parent="."]
+
+[node name="Front" type="RayCast" parent="Feelers"]
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+
+[node name="Left" type="RayCast" parent="Feelers"]
+enabled = true
+cast_to = Vector3( -0.5, 0, -1 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+
+[node name="Right" type="RayCast" parent="Feelers"]
+enabled = true
+cast_to = Vector3( 0.5, 0, -1 )
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+
+[node name="NeighborDetectionArea" type="Area" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource( 3 )
+parent_body = NodePath("..")
+
+[node name="CollisionShape" type="CollisionShape" parent="NeighborDetectionArea"]
+shape = SubResource( 10 )

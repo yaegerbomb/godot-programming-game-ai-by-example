@@ -74,7 +74,6 @@ mesh = SubResource( 5 )
 
 [node name="Fleer" parent="Agents" instance=ExtResource( 6 )]
 script = ExtResource( 7 )
-max_speed = 2.0
 max_force = 2.0
 
 [node name="DebugGUI" parent="." instance=ExtResource( 3 )]

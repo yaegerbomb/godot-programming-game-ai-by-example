@@ -21,15 +21,15 @@ func finished():
 	
 func set_next_waypoint():
 	var waypoints_length = waypoints.size()
-	assert(waypoints_length > 0)
-	
-	if current_waypoint_index >= (waypoints_length - 1):
-		if looped:
-			current_waypoint = waypoints[0]
-			current_waypoint_index = 0
-	else:
-		current_waypoint_index += 1
-		current_waypoint = waypoints[current_waypoint_index]
+	if waypoints_length > 0:
+		
+		if current_waypoint_index >= (waypoints_length - 1):
+			if looped:
+				current_waypoint = waypoints[0]
+				current_waypoint_index = 0
+		else:
+			current_waypoint_index += 1
+			current_waypoint = waypoints[current_waypoint_index]
 
 func _physics_process(delta):
 	if waypoints.size() >= 2:

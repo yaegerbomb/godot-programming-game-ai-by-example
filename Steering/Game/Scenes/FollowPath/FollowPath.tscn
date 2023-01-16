@@ -81,7 +81,7 @@ path_looped = false
 [node name="DebugGUI" parent="." instance=ExtResource( 3 )]
 
 [node name="SceneGUI" parent="." instance=ExtResource( 1 )]
-scene_title = "Seek Demo"
+scene_title = "Follow Path Demo"
 
 [node name="Path" type="Path" parent="."]
 curve = SubResource( 10 )
